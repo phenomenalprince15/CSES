@@ -50,7 +50,7 @@ int main() {
         cin >> nums[i];
     }
 
-    //cout << coinRecursive(nums, n-1, k) << endl;
+    // cout << coinRecursive(nums, n-1, k) << endl;
 
     // vector<vector<ll>> dp(n, vector<ll> (k+1, -1));
     // cout << coinMemoization(nums, n-1, k, dp) << endl;
@@ -62,29 +62,29 @@ int main() {
     // }
 
 
-    // 2D DP counts combinations, not permutations, so either use recursion or 1D DP
+    // this is combination I need to write recursive and memoization, 2D DP counts combinations, not permutations, so either use recursion or 1D DP
     
-    // vector<vector<ll>> dp(n + 1, vector<ll>(k + 1, 0));
-    // dp[0][0] = 1;  // Initialize dp[0][0] as 1 (one way to get sum 0)
+    vector<vector<ll>> dp(n + 1, vector<ll>(k + 1, 0));
+    dp[0][0] = 1;  // Initialize dp[0][0] as 1 (one way to get sum 0)
 
-    // // Initialize base cases where sum = 0
-    // for (ll i = 0; i <= n; i++) {
-    //     dp[i][0] = 1;
-    // }
+    // Initialize base cases where sum = 0
+    for (ll i = 0; i <= n; i++) {
+        dp[i][0] = 1;
+    }
 
-    // // Iterative DP filling
-    // for (ll i = 1; i <= n; i++) {  // For each index
-    //     for (ll j = 1; j <= k; j++) {  // For each possible sum
-    //         // Check if we can include nums[i-1] (since nums is 0-indexed)
-    //         if (j >= nums[i - 1]) {
-    //             dp[i][j] = (dp[i][j] + dp[i][j - nums[i - 1]]) % MOD;
-    //         }
-    //         // Add the count of ways without including nums[i-1]
-    //         dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
-    //     }
-    // }
+    // Iterative DP filling
+    for (ll i = 1; i <= n; i++) {  // For each index
+        for (ll j = 1; j <= k; j++) {  // For each possible sum
+            // Check if we can include nums[i-1] (since nums is 0-indexed)
+            if (j >= nums[i - 1]) {
+                dp[i][j] = (dp[i][j] + dp[i][j - nums[i - 1]]) % MOD;
+            }
+            // Add the count of ways without including nums[i-1]
+            dp[i][j] = (dp[i][j] + dp[i - 1][j]) % MOD;
+        }
+    }
 
-    // cout << dp[n][k] << endl;
+    cout << dp[n][k] << endl;
 
     // for (int i=0; i<=n; i++){
     //     for (int j=0; j<=k; j++) {
